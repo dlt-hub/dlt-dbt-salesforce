@@ -1,0 +1,714 @@
+version: 2
+sources:
+  - name: raw_data
+    schema: '{{ var ("source_dataset_name") }}'
+    tables:
+      - name: _dlt_loads
+      - name: event
+      - name: task
+      - name: pricebook_entry
+      - name: pricebook_2
+      - name: product_2
+      - name: campaign_member
+      - name: campaign
+      - name: lead
+      - name: contact
+      - name: account
+      - name: opportunity_contact_role
+      - name: opportunity_line_item
+      - name: opportunity
+      - name: user_role
+      - name: sf_user
+  - name: transformed_data
+    schema: '{{ var ("destination_dataset_name") }}'
+    tables:
+      - name: dlt_processed_load_ids
+
+models:
+      - name: dlt_processed_load_ids
+        description: "This table contains all processed load ids for incremental loading"
+      - name: _dlt_loads
+        description: "Created by DLT. Tracks completed loads"
+        columns:
+          - name: load_id
+            tests:
+              - not_null
+          - name: schema_name
+          - name: status
+            tests:
+              - not_null
+          - name: inserted_at
+            tests:
+              - not_null
+          - name: schema_version_hash
+      - name: event
+        columns:
+          - name: id
+          - name: who_id
+          - name: what_id
+          - name: subject
+          - name: location
+          - name: is_all_day_event
+          - name: activity_date_time
+          - name: activity_date
+          - name: duration_in_minutes
+          - name: start_date_time
+          - name: end_date_time
+          - name: end_date
+          - name: account_id
+          - name: owner_id
+          - name: is_private
+          - name: show_as
+          - name: is_deleted
+          - name: is_child
+          - name: is_group_event
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: is_archived
+          - name: is_recurrence
+          - name: is_reminder_set
+          - name: event_subtype
+          - name: is_recurrence2_exclusion
+          - name: is_recurrence2
+          - name: is_recurrence2_exception
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: description
+      - name: task
+        columns:
+          - name: id
+          - name: who_id
+          - name: what_id
+          - name: subject
+          - name: activity_date
+          - name: status
+          - name: priority
+          - name: is_high_priority
+          - name: owner_id
+          - name: description
+          - name: is_deleted
+          - name: account_id
+          - name: is_closed
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: is_archived
+          - name: is_reminder_set
+          - name: is_recurrence
+          - name: task_subtype
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: completed_date_time
+      - name: pricebook_entry
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: name
+          - name: pricebook2_id
+          - name: product2_id
+          - name: unit_price
+          - name: is_active
+          - name: use_standard_price
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: product_code
+          - name: is_deleted
+          - name: is_archived
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+      - name: pricebook_2
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: is_deleted
+          - name: name
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: is_active
+          - name: is_archived
+          - name: is_standard
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+      - name: product_2
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: name
+          - name: product_code
+          - name: is_active
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: is_deleted
+          - name: is_archived
+          - name: product_class
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+      - name: campaign_member
+        columns:
+          - name: id
+          - name: is_deleted
+          - name: campaign_id
+          - name: contact_id
+          - name: status
+          - name: has_responded
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: salutation
+          - name: name
+          - name: first_name
+          - name: last_name
+          - name: title
+          - name: street
+          - name: city
+          - name: state
+          - name: postal_code
+          - name: country
+          - name: email
+          - name: phone
+          - name: mobile_phone
+          - name: do_not_call
+          - name: has_opted_out_of_email
+          - name: has_opted_out_of_fax
+          - name: company_or_account
+          - name: type
+          - name: lead_or_contact_id
+          - name: lead_or_contact_owner_id
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: description
+          - name: lead_id
+          - name: first_responded_date
+          - name: fax
+          - name: lead_source
+      - name: campaign
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: is_deleted
+          - name: name
+          - name: type
+          - name: status
+          - name: start_date
+          - name: end_date
+          - name: expected_revenue
+          - name: budgeted_cost
+          - name: actual_cost
+          - name: expected_response
+          - name: number_sent
+          - name: is_active
+          - name: number_of_leads
+          - name: number_of_converted_leads
+          - name: number_of_contacts
+          - name: number_of_responses
+          - name: number_of_opportunities
+          - name: number_of_won_opportunities
+          - name: amount_all_opportunities
+          - name: amount_won_opportunities
+          - name: owner_id
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: last_viewed_date
+          - name: last_referenced_date
+      - name: lead
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: is_deleted
+          - name: last_name
+          - name: first_name
+          - name: salutation
+          - name: name
+          - name: title
+          - name: company
+          - name: street
+          - name: city
+          - name: state
+          - name: postal_code
+          - name: country
+          - name: phone
+          - name: fax
+          - name: email
+          - name: photo_url
+          - name: lead_source
+          - name: status
+          - name: industry
+          - name: rating
+          - name: annual_revenue
+          - name: owner_id
+          - name: is_converted
+          - name: is_unread_by_owner
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: clean_status
+          - name: is_priority_record
+          - name: sic_code_c
+          - name: product_interest_c
+          - name: primary_c
+          - name: current_generators_c
+          - name: numberof_locations_c
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: number_of_employees
+          - name: mobile_phone
+          - name: last_viewed_date
+          - name: last_referenced_date
+      - name: contact
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: is_deleted
+          - name: account_id
+          - name: last_name
+          - name: first_name
+          - name: salutation
+          - name: name
+          - name: mailing_street
+          - name: phone
+          - name: fax
+          - name: mobile_phone
+          - name: email
+          - name: title
+          - name: department
+          - name: lead_source
+          - name: birthdate
+          - name: owner_id
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: is_email_bounced
+          - name: photo_url
+          - name: clean_status
+          - name: is_priority_record
+          - name: level_c
+          - name: languages_c
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: mailing_city
+          - name: mailing_state
+          - name: mailing_postal_code
+          - name: mailing_country
+          - name: other_street
+          - name: other_city
+          - name: other_postal_code
+          - name: other_country
+          - name: assistant_phone
+          - name: assistant_name
+          - name: other_state
+          - name: other_phone
+          - name: description
+          - name: last_activity_date
+          - name: last_viewed_date
+          - name: last_referenced_date
+          - name: home_phone
+      - name: account
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: is_deleted
+          - name: name
+          - name: type
+          - name: billing_street
+          - name: billing_city
+          - name: billing_state
+          - name: shipping_street
+          - name: phone
+          - name: fax
+          - name: account_number
+          - name: website
+          - name: photo_url
+          - name: sic
+          - name: industry
+          - name: annual_revenue
+          - name: number_of_employees
+          - name: ownership
+          - name: ticker_symbol
+          - name: description
+          - name: rating
+          - name: owner_id
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: clean_status
+          - name: customer_priority_c
+          - name: sla_c
+          - name: active_c
+          - name: numberof_locations_c
+          - name: upsell_opportunity_c
+          - name: sla_serial_number_c
+          - name: sla_expiration_date_c
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: billing_postal_code
+          - name: billing_country
+          - name: shipping_city
+          - name: shipping_postal_code
+          - name: shipping_country
+          - name: shipping_state
+          - name: site
+          - name: last_activity_date
+          - name: last_viewed_date
+          - name: last_referenced_date
+          - name: parent_id
+      - name: opportunity_contact_role
+        columns:
+          - name: id
+          - name: opportunity_id
+          - name: contact_id
+          - name: role
+          - name: is_primary
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: is_deleted
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+      - name: opportunity_line_item
+        columns:
+          - name: id
+          - name: opportunity_id
+          - name: pricebook_entry_id
+          - name: product2_id
+          - name: product_code
+          - name: name
+          - name: quantity
+          - name: total_price
+          - name: unit_price
+          - name: list_price
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: is_deleted
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+      - name: opportunity
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: is_deleted
+          - name: account_id
+          - name: is_private
+          - name: name
+          - name: stage_name
+          - name: amount
+          - name: probability
+          - name: expected_revenue
+          - name: close_date
+          - name: type
+          - name: lead_source
+          - name: is_closed
+          - name: is_won
+          - name: forecast_category
+          - name: forecast_category_name
+          - name: has_opportunity_line_item
+          - name: owner_id
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: push_count
+          - name: fiscal_quarter
+          - name: fiscal_year
+          - name: has_open_activity
+          - name: has_overdue_task
+          - name: main_competitors_c
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: delivery_installation_status_c
+          - name: current_generators_c
+          - name: order_number_c
+          - name: tracking_number_c
+          - name: next_step
+          - name: last_viewed_date
+          - name: last_referenced_date
+          - name: total_opportunity_quantity
+          - name: pricebook2_id
+          - name: last_amount_changed_history_id
+          - name: campaign_id
+      - name: user_role
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: name
+          - name: rollup_description
+          - name: opportunity_access_for_account_owner
+          - name: case_access_for_account_owner
+          - name: contact_access_for_account_owner
+          - name: may_forecast_manager_share
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: developer_name
+          - name: portal_type
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: parent_role_id
+      - name: sf_user
+        columns:
+          - name: id
+            tests:
+              - unique
+          - name: username
+          - name: last_name
+          - name: first_name
+          - name: name
+          - name: company_name
+          - name: country
+          - name: email
+          - name: email_preferences_auto_bcc
+          - name: email_preferences_auto_bcc_stay_in_touch
+          - name: email_preferences_stay_in_touch_reminder
+          - name: alias
+          - name: community_nickname
+          - name: badge_text
+          - name: is_active
+          - name: time_zone_sid_key
+          - name: locale_sid_key
+          - name: receives_info_emails
+          - name: receives_admin_info_emails
+          - name: email_encoding_key
+          - name: profile_id
+          - name: user_type
+          - name: language_locale_key
+          - name: last_login_date
+          - name: last_password_change_date
+          - name: created_date
+          - name: created_by_id
+          - name: last_modified_date
+          - name: last_modified_by_id
+          - name: system_modstamp
+          - name: number_of_failed_logins
+          - name: user_permissions_marketing_user
+          - name: user_permissions_offline_user
+          - name: user_permissions_call_center_auto_login
+          - name: user_permissions_sf_content_user
+          - name: user_permissions_knowledge_user
+          - name: user_permissions_interaction_user
+          - name: user_permissions_support_user
+          - name: user_permissions_jigsaw_prospecting_user
+          - name: user_permissions_siteforce_contributor_user
+          - name: user_permissions_siteforce_publisher_user
+          - name: user_permissions_work_dot_com_user_feature
+          - name: forecast_enabled
+          - name: user_preferences_activity_reminders_popup
+          - name: user_preferences_event_reminders_checkbox_default
+          - name: user_preferences_task_reminders_checkbox_default
+          - name: user_preferences_reminder_sound_off
+          - name: user_preferences_disable_all_feeds_email
+          - name: user_preferences_disable_followers_email
+          - name: user_preferences_disable_profile_post_email
+          - name: user_preferences_disable_change_comment_email
+          - name: user_preferences_disable_later_comment_email
+          - name: user_preferences_dis_prof_post_comment_email
+          - name: user_preferences_content_no_email
+          - name: user_preferences_content_email_as_and_when
+          - name: user_preferences_apex_pages_developer_mode
+          - name: user_preferences_receive_no_notifications_as_approver
+          - name: user_preferences_receive_notifications_as_delegated_approver
+          - name: user_preferences_hide_csn_get_chatter_mobile_task
+          - name: user_preferences_disable_mentions_post_email
+          - name: user_preferences_dis_mentions_comment_email
+          - name: user_preferences_hide_csn_desktop_task
+          - name: user_preferences_hide_chatter_onboarding_splash
+          - name: user_preferences_hide_second_chatter_onboarding_splash
+          - name: user_preferences_dis_comment_after_like_email
+          - name: user_preferences_disable_like_email
+          - name: user_preferences_sort_feed_by_comment
+          - name: user_preferences_disable_message_email
+          - name: user_preferences_jigsaw_list_user
+          - name: user_preferences_disable_bookmark_email
+          - name: user_preferences_disable_share_post_email
+          - name: user_preferences_enable_auto_sub_for_feeds
+          - name: user_preferences_disable_file_share_notifications_for_api
+          - name: user_preferences_show_title_to_external_users
+          - name: user_preferences_show_manager_to_external_users
+          - name: user_preferences_show_email_to_external_users
+          - name: user_preferences_show_work_phone_to_external_users
+          - name: user_preferences_show_mobile_phone_to_external_users
+          - name: user_preferences_show_fax_to_external_users
+          - name: user_preferences_show_street_address_to_external_users
+          - name: user_preferences_show_city_to_external_users
+          - name: user_preferences_show_state_to_external_users
+          - name: user_preferences_show_postal_code_to_external_users
+          - name: user_preferences_show_country_to_external_users
+          - name: user_preferences_show_profile_pic_to_guest_users
+          - name: user_preferences_show_title_to_guest_users
+          - name: user_preferences_show_city_to_guest_users
+          - name: user_preferences_show_state_to_guest_users
+          - name: user_preferences_show_postal_code_to_guest_users
+          - name: user_preferences_show_country_to_guest_users
+          - name: user_preferences_show_forecasting_change_signals
+          - name: user_preferences_live_agent_miaw_setup_deflection
+          - name: user_preferences_hide_s1_browser_ui
+          - name: user_preferences_disable_endorsement_email
+          - name: user_preferences_path_assistant_collapsed
+          - name: user_preferences_cache_diagnostics
+          - name: user_preferences_show_email_to_guest_users
+          - name: user_preferences_show_manager_to_guest_users
+          - name: user_preferences_show_work_phone_to_guest_users
+          - name: user_preferences_show_mobile_phone_to_guest_users
+          - name: user_preferences_show_fax_to_guest_users
+          - name: user_preferences_show_street_address_to_guest_users
+          - name: user_preferences_lightning_experience_preferred
+          - name: user_preferences_preview_lightning
+          - name: user_preferences_hide_end_user_onboarding_assistant_modal
+          - name: user_preferences_hide_lightning_migration_modal
+          - name: user_preferences_hide_sfx_welcome_mat
+          - name: user_preferences_hide_bigger_photo_callout
+          - name: user_preferences_global_nav_bar_wt_shown
+          - name: user_preferences_global_nav_grid_menu_wt_shown
+          - name: user_preferences_create_lex_apps_wt_shown
+          - name: user_preferences_favorites_wt_shown
+          - name: user_preferences_record_home_section_collapse_wt_shown
+          - name: user_preferences_record_home_reserved_wt_shown
+          - name: user_preferences_favorites_show_top_favorites
+          - name: user_preferences_exclude_mail_app_attachments
+          - name: user_preferences_suppress_task_sfx_reminders
+          - name: user_preferences_suppress_event_sfx_reminders
+          - name: user_preferences_preview_custom_theme
+          - name: user_preferences_has_celebration_badge
+          - name: user_preferences_user_debug_mode_pref
+          - name: user_preferences_srh_override_activities
+          - name: user_preferences_new_lightning_report_run_page_enabled
+          - name: user_preferences_reverse_open_activities_view
+          - name: user_preferences_show_territory_time_zone_shifts
+          - name: user_preferences_has_sent_warning_email
+          - name: user_preferences_has_sent_warning_email238
+          - name: user_preferences_has_sent_warning_email240
+          - name: user_preferences_native_email_client
+          - name: user_preferences_show_forecasting_rounded_amounts
+          - name: full_photo_url
+          - name: small_photo_url
+          - name: is_ext_indicator_visible
+          - name: out_of_office_message
+          - name: medium_photo_url
+          - name: digest_frequency
+          - name: default_group_notification_frequency
+          - name: jigsaw_import_limit_override
+          - name: last_viewed_date
+          - name: last_referenced_date
+          - name: banner_photo_url
+          - name: small_banner_photo_url
+          - name: medium_banner_photo_url
+          - name: is_profile_photo_active
+          - name: _dlt_load_id
+            tests:
+              - not_null
+          - name: _dlt_id
+            tests:
+              - not_null
+              - unique
+          - name: sender_name
+          - name: about_me
