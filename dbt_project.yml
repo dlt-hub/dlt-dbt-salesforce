@@ -1,9 +1,9 @@
-name: 'salesforce_tst'
+name: 'salesforce'
 
 config-version: 2
 version: '0.1'
 
-profile: 'salesforce_tst'
+profile: 'salesforce'
 
 model-paths: ["models"]
 test-paths: ["tests"]

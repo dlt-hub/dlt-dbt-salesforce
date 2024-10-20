@@ -89,17 +89,7 @@ dbt_salesforce_datamodel/
 Execute the dbt models to transform the raw Salesforce data into useful tables:
 
 ```sh
-dbt run
-```
-
->You can use the 'run_salesforce_dbt.py' script to execute your dbt transformations and load the results into a 
->new dataset named `<original-dataset>_transformed` and runs the dbt tests.To use, please ensure you configure 
->your dlt pipeline name and destination correctly.
-
-To check for issues, run the dbt tests:
-
-```sh
-dbt test
+dbt build
 ```
 
 ### Customization
@@ -120,8 +110,9 @@ for data model which can be further modified as required.
     
    ![picture](https://storage.googleapis.com/dlt-blog-images/Salesforce_raw_schema.png)
 
-   > Please note that this is a starting template for your data model and is not the final product. It is advised to customize the
-   > data model as per your needs.
+> ⚠️ **Note:**
+> 
+> Please note that this is a starting template for your data model and is not the final product. It is advised to customize the data model as per your needs.
 
    Here's the link to the DB diagram: [link](https://dbdiagram.io/d/Salesforce_raw_schema-66e50c3a6dde7f414914fcf3).
 
