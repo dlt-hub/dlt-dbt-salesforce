@@ -108,13 +108,13 @@ for data model which can be further modified as required.
 
 1. The schema of data modelled above using dlt-dbt-generator:
     
-   ![picture](https://storage.googleapis.com/dlt-blog-images/Salesforce%20dlt-dbt%20package.png)
+   ![picture](https://storage.googleapis.com/dlt-blog-images/salesforce_dlt_dbt_dim_model.png)
 
 > ⚠️ **Note:**
 > 
 > Please note that this is a starting template for your data model and is not the final product. It is advised to customize the data model as per your needs.
 
-   Here's the link to the DB diagram: [link](https://dbdiagram.io/d/Salesforce-dlt-dbt-package-6714f07197a66db9a39a7419).
+   Here's the link to the DB diagram: [link](https://dbdiagram.io/d/salesforce_dlt_dbt_v1-5-67486894e9daa85aca057fb1).
 
 #### Optional: Advanced Usage (Generator and Licensing)
 
