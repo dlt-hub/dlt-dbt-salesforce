@@ -8,34 +8,34 @@ This package is perfect for dbt users who want to integrate Salesforce data into
 
 
 ### Key Features
-- **Staging Models:** Clean and prepare raw HubSpot data for downstream analysis.
-- **Mart Models:** Pre-built dimension and fact tables for key HubSpot entities like contacts, deals, companies, and tickets.
+- **Staging Models:** Clean and prepare raw Salesforce data for downstream analysis.
+- **Mart Models:** Pre-built dimension and fact tables for key Salesforce entities like contacts, deals, companies, and tickets.
 - **Incremental Loading:** Supports incremental data processing to optimize performance.
-- **Easy Integration:** Designed to work out-of-the-box with the dlt HubSpot pipeline.
+- **Easy Integration:** Designed to work out-of-the-box with the dlt Salesforce pipeline.
 
 ### Setup Instructions
 
 #### Prerequisites
 - dbt Core installed in your environment.
 - Access to a supported data warehouse: BigQuery, Snowflake, Redshift, Athena, or PostgreSQL.
-- The dlt HubSpot pipeline is set up and running.
+- The dlt Salesforce pipeline is set up and running.
 
-### Step 1: Set Up the dlt HubSpot Pipeline
+### Step 1: Set Up the dlt Salesforce Pipeline
 1. **Install dlt:**
    ``` 
    pip install dlt
    ```
 2. **Configure the Pipeline:**
-   Follow the dlt HubSpot pipeline documentation to set up your pipeline. Ensure you have your HubSpot API key and destination credentials configured.
+   Follow the dlt Salesforce [pipeline documentation](https://dlthub.com/docs/dlt-ecosystem/verified-sources/salesforce) to set up your pipeline. Ensure you have your Salesforce API key and destination credentials configured.
 
 3. **Run the Pipeline:**
-   Extract and load data from HubSpot into your data warehouse by running the pipeline.
+   Extract and load data from Salesforce into your data warehouse by running the pipeline.
 
 ### Step 2: Install and Configure the dbt Project
 
 1. Install the Salesforce dbt package into your dbt environment.
 2. Configure your 'dbt_project.yml' file with the appropriate connection details for your data warehouse.
-3. Ensure the data from your dlt HubSpot pipeline is available in your warehouse.
+3. Ensure the data from your dlt Salesforce pipeline is available in your warehouse.
 
 This is how the tables in dbt package look like:
 ```text
